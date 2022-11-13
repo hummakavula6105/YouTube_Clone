@@ -1,5 +1,7 @@
 # from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db import models
+from authentication.models import User
 
 
 class User(AbstractUser):
@@ -14,3 +16,11 @@ class User(AbstractUser):
     # Example (note import of models above that is commented out)
     # this will add a column to the user table
     # is_student = models.BooleanField('student status', default=False)
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    video_id = models.CharField(max_length=30)
+    text = models.CharField(max_length=100)
+    likes = models.IntegerField()
+    dislikes = models.IntegerField()
